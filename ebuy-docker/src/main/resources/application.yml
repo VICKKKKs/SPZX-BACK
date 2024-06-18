@@ -1,0 +1,19 @@
+# 配置端口号
+server:
+  port: 8081
+
+# 配置数据库连接信息
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.136.142:3306/docker?characterEncoding=UTF-8
+    username: root
+    password: 1234
+    type: com.zaxxer.hikari.HikariDataSource
+
+# 配置mybatis的相关信息
+mybatis:
+  type-aliases-package: com.atguigu.ebuy.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:/com/atguigu/ebuy/mapper/*Mapper.xml
