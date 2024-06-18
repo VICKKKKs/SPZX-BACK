@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学校信息</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
+    <script src="//unpkg.com/element-plus"></script>            <!-- 引入组件库 -->
+</head>
+<body>
+
+    <div id="app">
+        <center>
+            <h1>学校信息</h1>
+            <el-table :data="schoolList" stripe style="width: 80%">
+                <el-table-column prop="id" label="主键" width="180"> </el-table-column>
+                <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
+                <el-table-column prop="address" label="地址"> </el-table-column>
+            </el-table>
+        </center>
+    </div>
+
+</body>
+<script>
+
+  const App = {
+      data() {
+          return {
+              schoolList: []
+          }
+      },
+      mounted() {
+          const _this = this ;
+          axios.get("/school/findAllTbSchool").then((resp) => {
+              _this.schoolList = resp.data ;
+          })
+      }
+  }
+
+  const app = Vue.createApp(App);
+  app.use(ElementPlus) ;
+  app.mount("#app") ;
+
+</script>
+</html>
