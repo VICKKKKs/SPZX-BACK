@@ -14,10 +14,10 @@ public enum ResultCodeEnum {
     NOTFOUND_ERROR(404, "资源不存在");
 
     private int code;
-    private String msg;
+    private String message;
 
-    private ResultCodeEnum(int code, String msg) {
+    private ResultCodeEnum(int code, String message) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
     }
 }

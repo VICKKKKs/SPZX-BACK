@@ -6,16 +6,16 @@ import lombok.Data;
 public class Result<T> {
 
     private Integer code;
-    private String msg;
+    private String message;
 
     private T data;
 
     // 返回数据
-    public static <T> Result<T> build(T body, Integer code, String msg) {
+    public static <T> Result<T> build(T body, Integer code, String message) {
         Result<T> result = new Result<>();
         result.setData(body);
         result.setCode(code);
-        result.setMsg(msg);
+        result.setMessage(message);
         return result;
     }
 
@@ -23,12 +23,12 @@ public class Result<T> {
         Result<T> result = new Result<>();
         result.setData(data);
         result.setCode(200);
-        result.setMsg("success");
+        result.setMessage("success");
         return result;
     }
     public static <T> Result fail(String message) {
         Result<T> result = new Result<>();
-        result.setMsg(message);
+        result.setMessage(message);
         result.setCode(500);
         result.setData(null);
         return result;
@@ -39,7 +39,7 @@ public class Result<T> {
 
         result.setData(body);
         result.setCode(resultCodeEnum.getCode());
-        result.setMsg(result.getMsg());
+        result.setMessage(resultCodeEnum.getMessage());
         result.setData(null);
         return result;
     }

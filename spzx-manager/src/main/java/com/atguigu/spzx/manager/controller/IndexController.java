@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/admin/system/index")
+@CrossOrigin(allowCredentials = "true" , originPatterns = "*" , allowedHeaders = "*")
 public class IndexController {
 
     @GetMapping("test1")
@@ -31,9 +32,9 @@ public class IndexController {
     private SysUserService sysUserService;
 
     @PostMapping("/login")
-    public Result<LoginVo> login(@RequestBody LoginDto loginDto){
+    public Result<LoginVo> login(@RequestBody LoginDto loginDto) throws Exception {
         LoginVo loginVo = sysUserService.login(loginDto);
-        return Result.build(loginVo, ResultCodeEnum.SUCCESS);
+        return Result.ok(loginVo);
     }
 
 }

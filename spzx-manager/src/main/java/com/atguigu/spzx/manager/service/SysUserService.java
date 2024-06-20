@@ -4,5 +4,5 @@ import com.atguigu.spzx.model.dto.system.LoginDto;
 import com.atguigu.spzx.model.vo.system.LoginVo;
 
 public interface SysUserService {
-    public abstract LoginVo login(LoginDto loginDto);
+    public abstract LoginVo login(LoginDto loginDto) throws Exception;
 }
