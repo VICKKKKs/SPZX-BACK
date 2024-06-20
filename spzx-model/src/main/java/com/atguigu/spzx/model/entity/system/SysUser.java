@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class SysUser extends BaseEntity {
-    private String username;  // 该字段的属性名称和数据表字段不一致
+    private String userName;  // 该字段的属性名称和数据表字段不一致
     private String password;
     private String name;
     private String phone;
