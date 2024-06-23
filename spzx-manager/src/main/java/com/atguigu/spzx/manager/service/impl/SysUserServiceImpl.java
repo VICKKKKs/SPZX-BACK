@@ -11,6 +11,7 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.springframework.util.DigestUtils;
 
 import java.util.UUID;
@@ -30,6 +31,10 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public LoginVo login(LoginDto loginDto) throws Exception {
 
+        String captcha = loginDto.getCaptcha();
+        String codeKey = loginDto.getCodeKey();
+
+
         String username = loginDto.getUserName();
         MyAssert.hasText(username,"用户名不能为空");
 
@@ -46,6 +51,12 @@ public class SysUserServiceImpl implements SysUserService {
         String passwordDb = sysUser.getPassword();
         MyAssert.isTrue(passwordDb.equals(InputPassword),"密码错误");
 
+        // 校验验证码
+        Assert.hasText(captcha,"验证码不能为空");
+        String redisCaptcha = redisTemplate.opsForValue().get("user:login:validatecode:" + codeKey);
+        Assert.hasText(redisCaptcha,"验证码过期");
+        Assert.isTrue(redisCaptcha.equals(captcha),"验证码错误");
+
         // 生成令牌，保存数据到Redis中
         String token = UUID.randomUUID().toString().replace("-", "");
         redisTemplate.opsForValue().set("user:login:" + token, JSON.toJSONString(sysUser), 30, TimeUnit.MINUTES);
@@ -56,5 +67,18 @@ public class SysUserServiceImpl implements SysUserService {
         loginVo.setRefresh_token("");
         //返回
         return loginVo;
+    }
+
+    @Override
+    public SysUser getUserInfo(String token) {
+        String userJson =  redisTemplate.opsForValue().get("user:login:" + token);
+        SysUser sysUser = JSON.parseObject(userJson, SysUser.class);
+
+        return sysUser;
+    }
+
+    @Override
+    public void logout(String token) {
+        redisTemplate.delete("user:login:" + token);
     }
 }
