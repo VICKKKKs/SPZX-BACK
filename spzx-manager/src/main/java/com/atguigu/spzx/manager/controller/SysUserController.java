@@ -31,14 +31,14 @@ public class SysUserController {
     @PostMapping(value = "/saveSysUser")
     public Result saveSysUser(@RequestBody SysUser sysUser) {
         sysUserService.saveSysUser(sysUser);
-        System.out.println("ok");
+//        System.out.println("ok");
         return Result.ok(null);
 //        return Result.build(null,ResultCodeEnum.SUCCESS);
     }
 
     @PutMapping(value = "/updateSysUser")
     public Result updateSysUser(@RequestBody SysUser sysUser) {
-        System.out.println("good");
+//        System.out.println("good");
         sysUserService.updateSysUser(sysUser);
         return Result.ok(null);
     }

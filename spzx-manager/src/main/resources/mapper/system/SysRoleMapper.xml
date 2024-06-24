@@ -43,6 +43,7 @@
     </select>
     
     <resultMap id="sysRoleMap" type="com.atguigu.spzx.model.entity.system.SysRole" autoMapping="true"/>
+
     <select id="selectAllSysRole" resultType="com.atguigu.spzx.model.entity.system.SysRole">
         select * from sys_role where is_deleted=0
     </select>

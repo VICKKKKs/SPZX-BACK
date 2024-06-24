@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.spzx.manager.mapper.SysMenuMapper">
+    <select id="findNodes" resultType="com.atguigu.spzx.model.entity.system.SysMenu">
+        select * from sys_menu where is_deleted = 0 and parent_id = #{parentId}
+    </select>
+    <select id="findAllNodes" resultType="com.atguigu.spzx.model.entity.system.SysMenu">
+        select * from sys_menu where is_deleted = 0
+    </select>
+
+</mapper>

@@ -13,6 +13,7 @@ public interface SysRoleMapper {
     void insertSysRole(SysRole sysRole);
 
     void updateSysRole(SysRole sysRole);
+
     List<SysRole> selectAllSysRole();
 
     void deleteById(Integer roleId);
