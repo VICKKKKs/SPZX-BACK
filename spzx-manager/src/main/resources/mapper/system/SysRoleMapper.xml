@@ -29,6 +29,9 @@
         where
         id = #{id}
     </update>
+    <delete id="deleteById">
+        delete from  sys_role where id = #{roleId}
+    </delete>
 
     <select id="selectByPage" resultMap="sysRoleMap">
         select * from sys_role
