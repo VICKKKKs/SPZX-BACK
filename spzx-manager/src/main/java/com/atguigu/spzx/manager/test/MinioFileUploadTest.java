@@ -31,8 +31,10 @@ public class MinioFileUploadTest {
 
         FileInputStream file = new FileInputStream("C:\\Users\\dongs\\OneDrive\\图片\\头像\\1.png");
         PutObjectArgs putObjectArgs = new PutObjectArgs().builder()
-                .bucket("spzx-bucket").stream(file,file.available(),-1).object("1.png").build();
+                .bucket("spzx-bucket").stream(file,file.available(),-1).object("1.png" ).build();
         minioClient.putObject(putObjectArgs);
+
+
 
         System.out.println("3");
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.spzx.manager.mapper.SysUserRoleMapper">
+    <insert id="insertRoleIdsByUserId">
+        insert into sys_user_role  (user_id,role_id)
+            values
+        <foreach collection="roleIdList" separator="," item="roleId">
+            (#{userId},#{roleId})
+        </foreach>
+    </insert>
+    <delete id="deleteRoleIdByUserId">
+        delete  from sys_user_role where user_id = #{currentUserId}
+    </delete>
+
+
+    <select id="selectCurrentRoleIds" resultType="java.lang.Long">
+        select role_id from sys_user_role where user_id = #{currentUserId}
+    </select>
+
+</mapper>

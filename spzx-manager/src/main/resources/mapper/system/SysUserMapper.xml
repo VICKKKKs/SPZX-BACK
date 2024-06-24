@@ -28,6 +28,7 @@
                      #{status}
                  )
     </insert>
+
     <update id="updateSysUser">
         update sys_user set
         <if test="username!=null and username!=''">
@@ -47,6 +48,9 @@
         </if>
         <if test="status!=null and status!=''">
              status = #{status},
+        </if>
+        <if test="avatar!=null and avatar!=''">
+            avatar = #{avatar},
         </if>
         update_time = now()
         where id = #{id}
