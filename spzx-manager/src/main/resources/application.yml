@@ -1,0 +1,37 @@
+server:
+  port: 8501
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.222.20:3306/db_spzx_1?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+  data:
+    redis:
+      host: 192.168.222.20
+      port: 6379
+      password: 123456
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*/*Mapper.xml
+    #configuration:
+    #map-underscore-to-camel-case: true
+  #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+spzx:
+  minio:
+    endpointUrl: http://192.168.222.20:9001
+    accessKey: admin
+    secreKey: admin123456
+    bucketName: spzx-bucket
+  auth:
+    noAuthUrls:
+      - /admin/system/index/login
+      - /admin/system/index/generateValidateCode
+      - /webjars/js/**
+      - /v3/api-docs/**
+      - /favicon.ico
+      - /doc.html
+      - /webjars/css/**

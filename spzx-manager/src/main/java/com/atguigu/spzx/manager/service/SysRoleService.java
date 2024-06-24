@@ -12,4 +12,6 @@ public interface SysRoleService {
     void saveSysRole(SysRole sysRole);
 
     void updateSysRole(SysRole sysRole);
+
+    void deleteById(Integer roleId);
 }

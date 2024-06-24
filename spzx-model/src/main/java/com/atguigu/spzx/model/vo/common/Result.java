@@ -38,7 +38,8 @@ public class Result<T> {
         Result<T> result = new Result<>();
         result.setMessage(resultCodeEnum.getMessage());
         result.setCode(resultCodeEnum.getCode());
-        result.setData(null);
+        // result.setData(null);
+        result.setData(body);
         return result;
     }
 }
