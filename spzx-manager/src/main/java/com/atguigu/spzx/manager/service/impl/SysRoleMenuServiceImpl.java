@@ -4,6 +4,7 @@ import com.atguigu.spzx.manager.mapper.SysMenuMapper;
 import com.atguigu.spzx.manager.mapper.SysRoleMenuMapper;
 import com.atguigu.spzx.manager.service.SysMenuService;
 import com.atguigu.spzx.manager.service.SysRoleMenuService;
+import com.atguigu.spzx.model.dto.system.AssginMenuDto;
 import com.atguigu.spzx.model.entity.system.SysMenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,12 @@ public class SysRoleMenuServiceImpl implements SysRoleMenuService {
         map.put("sysMenuList", sysMenuList);
         map.put("roleMenuIds", roleMenuIds);
         return map;
+    }
+
+    @Override
+    public void doAssignMenuIdToSysRole(AssginMenuDto assginMenuDto) {
+        // delete -> insert
+        sysRoleMenuMapper.deletedByRoleId(assginMenuDto.getRoleId());
+        sysRoleMenuMapper.insertByMenuIdList(assginMenuDto);
     }
 }
