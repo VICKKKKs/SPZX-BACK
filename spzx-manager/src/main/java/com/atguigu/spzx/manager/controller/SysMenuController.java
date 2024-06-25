@@ -21,4 +21,16 @@ public class SysMenuController {
         List<SysMenu> sysMenuList = sysMenuService.findNodes(parentId);
         return Result.ok(sysMenuList);
     }
+
+    @PostMapping(value = "saveSysMenu")
+    public Result<SysMenu> saveSysMenu(@RequestBody SysMenu sysMenu) {
+        sysMenuService.saveSysMenu(sysMenu);
+        return Result.ok(null);
+    }
+
+    @PutMapping(value = "updateSysMenu")
+    public Result<SysMenu> updateSysMenu(@RequestBody SysMenu sysMenu) {
+        sysMenuService.updateSysMenu(sysMenu);
+        return Result.ok(null);
+    }
 }

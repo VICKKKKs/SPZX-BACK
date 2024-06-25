@@ -8,4 +8,8 @@ public interface SysMenuMapper {
     List<SysMenu> findNodes(Long parentId);
 
     List<SysMenu> findAllNodes();
+
+    void insertSysMenu(SysMenu sysMenu);
+
+    void updateSysMenu(SysMenu sysMenu);
 }

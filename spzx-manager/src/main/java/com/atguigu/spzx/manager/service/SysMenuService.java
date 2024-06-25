@@ -7,4 +7,8 @@ import java.util.List;
 public interface SysMenuService {
 
     List<SysMenu> findNodes(Long parentId);
+
+    void saveSysMenu(SysMenu sysMenu);
+
+    void updateSysMenu(SysMenu sysMenu);
 }

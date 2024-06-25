@@ -1,11 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.atguigu.spzx.manager.mapper.SysMenuMapper">
+
+    <insert id="insertSysMenu">
+        insert into sys_menu (id, parent_id, title, component, sort_value, status)
+        values (#{id},#{parentId},#{title},#{component},#{sortValue},#{status})
+    </insert>
+
+    <update id="updateSysMenu">
+        update sys_menu set
+        <if test="parentId != null and parentId != ''">
+            parent_id = #{parentId},
+        </if>
+        <if test="title != null and title != ''">
+            title = #{title},
+        </if>
+        <if test="component != null and component != ''">
+            component = #{component},
+        </if>
+        <if test="sortValue != null and sortValue != ''">
+            sort_value = #{sortValue},
+        </if>
+        <if test="status != null and status != ''">
+            status = #{status},
+        </if>
+        update_time = now()
+        where id = #{id}
+    </update>
     <select id="findNodes" resultType="com.atguigu.spzx.model.entity.system.SysMenu">
-        select * from sys_menu where is_deleted = 0 and parent_id = #{parentId}
+        select *
+        from sys_menu
+        where is_deleted = 0
+          and parent_id = #{parentId}
     </select>
     <select id="findAllNodes" resultType="com.atguigu.spzx.model.entity.system.SysMenu">
-        select * from sys_menu where is_deleted = 0
+        select *
+        from sys_menu
+        where is_deleted = 0
     </select>
 
 </mapper>

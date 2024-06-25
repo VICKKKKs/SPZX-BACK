@@ -17,7 +17,19 @@ public class SysMenuServiceImpl implements SysMenuService {
     public List<SysMenu> findNodes(Long parentId) {
 //        List<SysMenu> nodes = sysMenuMapper.findNodes(parentId);
 
+        if(parentId == null){}
         List<SysMenu> allNodes = sysMenuMapper.findAllNodes();
-        return allNodes;
+        List<SysMenu> sysMenuList = MenuHelper.buildTree(allNodes);
+        return sysMenuList;
+    }
+
+    @Override
+    public void saveSysMenu(SysMenu sysMenu) {
+        sysMenuMapper.insertSysMenu(sysMenu);
+    }
+
+    @Override
+    public void updateSysMenu(SysMenu sysMenu) {
+        sysMenuMapper.updateSysMenu(sysMenu);
     }
 }
