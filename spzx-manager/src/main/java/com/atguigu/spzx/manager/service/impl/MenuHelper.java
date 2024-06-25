@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuHelper {
+
     public static List<SysMenu> buildTree(List<SysMenu> allNodes) {
         List<SysMenu> treeNodes = new ArrayList<>();
         for (SysMenu sysMenu : allNodes) {
@@ -14,7 +15,6 @@ public class MenuHelper {
             }
         }
         return treeNodes;
-
     }
 
     private static SysMenu findChildren(SysMenu sysMenu, List<SysMenu> allNodes) {

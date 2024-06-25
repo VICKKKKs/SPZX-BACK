@@ -12,4 +12,6 @@ public interface SysMenuMapper {
     void insertSysMenu(SysMenu sysMenu);
 
     void updateSysMenu(SysMenu sysMenu);
+
+    List<SysMenu> selectSysMenuListByUserId(Long userId);
 }

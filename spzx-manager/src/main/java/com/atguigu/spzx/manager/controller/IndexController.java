@@ -1,5 +1,6 @@
 package com.atguigu.spzx.manager.controller;
 
+import com.atguigu.spzx.manager.service.SysMenuService;
 import com.atguigu.spzx.manager.service.SysUserService;
 import com.atguigu.spzx.manager.service.ValidateCodeService;
 import com.atguigu.spzx.model.dto.system.LoginDto;
@@ -8,9 +9,12 @@ import com.atguigu.spzx.model.entity.system.SysUserAuthContextUtil;
 import com.atguigu.spzx.model.vo.common.Result;
 import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
 import com.atguigu.spzx.model.vo.system.LoginVo;
+import com.atguigu.spzx.model.vo.system.SysMenuVo;
 import com.atguigu.spzx.model.vo.system.ValidateCodeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/admin/system/index")
@@ -65,6 +69,16 @@ public class IndexController {
     public Result logout(@RequestHeader(name = "token") String token) {
         sysUserService.logout(token);
         return Result.ok(ResultCodeEnum.SUCCESS);
+    }
+
+    @Autowired
+    private SysMenuService sysMenuService;
+
+    // com.atguigu.spzx.system.controller#IndexController
+    @GetMapping("/menus")
+    public Result menus() {
+        List<SysMenuVo> sysMenuVoList =  sysMenuService.findUserMenuList() ;
+        return Result.build(sysMenuVoList , ResultCodeEnum.SUCCESS) ;
     }
 
 }
