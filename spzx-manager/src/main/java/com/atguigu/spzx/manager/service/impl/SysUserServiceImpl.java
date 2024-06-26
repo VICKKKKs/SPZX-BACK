@@ -110,6 +110,8 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public void updateSysUser(SysUser sysUser) {
+        String password = DigestUtils.md5DigestAsHex(sysUser.getPassword().getBytes());
+        sysUser.setPassword(password);
         sysUserMapper.updateSysUser(sysUser);
     }
 

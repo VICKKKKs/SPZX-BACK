@@ -20,6 +20,6 @@ public class MenuVoHelper {
             }
             voTree.add(vo);
         }
-        return null;
+        return voTree;
     }
 }
