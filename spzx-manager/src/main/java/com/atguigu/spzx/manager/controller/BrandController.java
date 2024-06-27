@@ -40,4 +40,10 @@ public class BrandController {
         brandService.deleteBrandById(id);
         return Result.ok(null);
     }
+
+    @GetMapping(value = "findAllBrand")
+    public Result<List<Brand>> findAllBrand() {
+        List<Brand> brandList = brandService.findAllBrand();
+        return Result.ok(brandList);
+    }
 }
