@@ -8,4 +8,8 @@ public interface CategoryMapper {
     List<Category> selectByParentId(Long parentId);
 
     Long countParentId(Long categoryId);
+
+    void batchInsert(List<Category> categories);
+
+    List<Category> selectAll();
 }

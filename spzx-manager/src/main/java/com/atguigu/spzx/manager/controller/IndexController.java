@@ -75,6 +75,7 @@ public class IndexController {
     private SysMenuService sysMenuService;
 
     // com.atguigu.spzx.system.controller#IndexController
+    // 动态菜单
     @GetMapping("/menus")
     public Result menus() {
         List<SysMenuVo> sysMenuVoList =  sysMenuService.findUserMenuList() ;
