@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface CategoryBrandMapper {
     List<CategoryBrand> findByPage(CategoryBrandDto categoryBrandDto);
+
+    void insertCategoryBrand(CategoryBrand categoryBrand);
+
+    void updateCategoryBrand(CategoryBrand categoryBrand);
 }

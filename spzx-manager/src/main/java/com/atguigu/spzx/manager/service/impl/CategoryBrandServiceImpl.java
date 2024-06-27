@@ -24,4 +24,13 @@ public class CategoryBrandServiceImpl implements CategoryBrandService {
         return new PageInfo<>(categoryBrandList);
     }
 
+    @Override
+    public void saveCategoryBrand(CategoryBrand categoryBrand) {
+        categoryBrandMapper.insertCategoryBrand(categoryBrand);
+    }
+
+    @Override
+    public void updateCategoryBrand(CategoryBrand categoryBrand) {
+        categoryBrandMapper.updateCategoryBrand(categoryBrand);
+    }
 }

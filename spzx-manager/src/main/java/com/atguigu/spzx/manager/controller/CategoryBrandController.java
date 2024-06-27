@@ -23,4 +23,17 @@ public class CategoryBrandController {
         return Result.ok(pageInfo);
     }
 
+    @PostMapping(value = "saveCategoryBrand")
+    public Result saveCategoryBrand(@RequestBody CategoryBrand categoryBrand) {
+        categoryBrandService.saveCategoryBrand(categoryBrand);
+        return Result.ok(null);
+    }
+
+    @PutMapping(value = "updateCategoryBrand")
+    public Result updateCategoryBrand(@RequestBody CategoryBrand categoryBrand) {
+        categoryBrandService.updateCategoryBrand(categoryBrand);
+        return Result.ok(null);
+    }
+
+
 }
