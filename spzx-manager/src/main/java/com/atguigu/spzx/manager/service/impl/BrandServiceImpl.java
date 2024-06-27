@@ -22,4 +22,19 @@ public class BrandServiceImpl implements BrandService {
         List<Brand> brandList = brandMapper.selectBrandPageList();
         return new PageInfo<>(brandList);
     }
+
+    @Override
+    public void saveBrand(Brand brand) {
+        brandMapper.insertBrand(brand);
+    }
+
+    @Override
+    public void updateBrandById(Brand brand) {
+        brandMapper.updateBrandById(brand);
+    }
+
+    @Override
+    public void deleteBrandById(Long id) {
+         brandMapper.deleteBrandById(id);
+    }
 }

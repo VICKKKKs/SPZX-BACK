@@ -22,4 +22,22 @@ public class BrandController {
         PageInfo<Brand> pageInfo = brandService.findBrandPageList(page,limit);
         return Result.ok(pageInfo);
     }
+
+    @PostMapping(value = "saveBrand")
+    public Result saveBrand(@RequestBody Brand brand) {
+        brandService.saveBrand(brand);
+        return Result.ok(null);
+    }
+
+    @PutMapping(value = "updateBrandById")
+    public Result updateBrandById(@RequestBody Brand brand) {
+        brandService.updateBrandById(brand);
+        return Result.ok(null);
+    }
+
+    @DeleteMapping(value = "deleteBrandById/{id}")
+    public Result deleteBrandById(@PathVariable Long id) {
+        brandService.deleteBrandById(id);
+        return Result.ok(null);
+    }
 }
