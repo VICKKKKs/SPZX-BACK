@@ -5,7 +5,6 @@ import com.atguigu.spzx.model.dto.product.CategoryBrandDto;
 import com.atguigu.spzx.model.entity.product.CategoryBrand;
 import com.atguigu.spzx.model.vo.common.Result;
 import com.github.pagehelper.PageInfo;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

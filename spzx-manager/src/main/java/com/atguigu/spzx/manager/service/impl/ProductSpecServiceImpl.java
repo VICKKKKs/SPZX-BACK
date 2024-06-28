@@ -22,4 +22,19 @@ public class ProductSpecServiceImpl implements ProductSpecService {
         List<ProductSpec> productSpecList =  productSpecMapper.selectPage();
         return new PageInfo<>(productSpecList);
     }
+
+    @Override
+    public void save(ProductSpec productSpec) {
+        productSpecMapper.insertProductSpec(productSpec);
+    }
+
+    @Override
+    public void updateById(ProductSpec productSpec) {
+        productSpecMapper.updateById(productSpec);
+    }
+
+    @Override
+    public void deleteByid(Long id) {
+        productSpecMapper.deleteById(id);
+    }
 }
