@@ -8,6 +8,8 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/admin/product/productSpec")
 @CrossOrigin(allowCredentials = "true" , originPatterns = "*" , allowedHeaders = "*")
@@ -37,5 +39,11 @@ public class ProductSpecController {
     public Result deleteById(@PathVariable Long id) {
         productSpecService.deleteById(id);
         return Result.ok(null);
+    }
+
+    @GetMapping(value = "findAllProductSpec")
+    public Result<List<ProductSpec>> findAllProductSpec() {
+        List<ProductSpec> productSpecList  = productSpecService.selectAllProductSpec();
+        return Result.ok(productSpecList);
     }
 }

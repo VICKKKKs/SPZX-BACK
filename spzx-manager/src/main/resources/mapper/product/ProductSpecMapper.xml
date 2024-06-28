@@ -27,4 +27,8 @@
     <select id="selectPage" resultType="com.atguigu.spzx.model.entity.product.ProductSpec">
         select * from product_spec where is_deleted = 0
     </select>
+
+    <select id="selectAllProductSpec" resultType="com.atguigu.spzx.model.entity.product.ProductSpec">
+        select * from product_spec where is_deleted=0
+    </select>
 </mapper>

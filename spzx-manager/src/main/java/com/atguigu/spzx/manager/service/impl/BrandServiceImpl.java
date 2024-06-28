@@ -43,4 +43,6 @@ public class BrandServiceImpl implements BrandService {
         List<Brand> brandList = brandMapper.selectBrandPageList();
         return brandList;
     }
+
+
 }

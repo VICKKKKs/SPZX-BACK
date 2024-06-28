@@ -46,4 +46,5 @@ public class BrandController {
         List<Brand> brandList = brandService.findAllBrand();
         return Result.ok(brandList);
     }
+
 }

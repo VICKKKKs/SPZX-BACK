@@ -34,8 +34,11 @@ public class Knife4jConfig {
                         .title("尚品甑选API接口文档")
                         .version("1.0")
                         .description("尚品甑选API接口文档")
-                        .contact(new Contact().name("cjz"))) //// 设定作者
-                .components(new Components().addSecuritySchemes("token", new SecurityScheme().type(SecurityScheme.Type.APIKEY).in(SecurityScheme.In.HEADER).name("token")));
+                        .contact(new Contact().name("vick"))) //// 设定作者
+                .components(new Components()
+                        .addSecuritySchemes("token", new SecurityScheme()
+                                .type(SecurityScheme.Type.APIKEY)
+                                .in(SecurityScheme.In.HEADER).name("token")));
     }
 
 }
