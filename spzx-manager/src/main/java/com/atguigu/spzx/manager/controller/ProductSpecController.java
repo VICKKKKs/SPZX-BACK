@@ -35,7 +35,7 @@ public class ProductSpecController {
 
     @DeleteMapping(value = "deleteById/{id}")
     public Result deleteById(@PathVariable Long id) {
-        productSpecService.deleteByid(id);
+        productSpecService.deleteById(id);
         return Result.ok(null);
     }
 }
