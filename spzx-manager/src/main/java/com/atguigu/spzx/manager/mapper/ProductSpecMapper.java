@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface ProductSpecMapper {
     List<ProductSpec> selectPage();
+
+    void insertProductSpec(ProductSpec productSpec);
+
+    void updateById(ProductSpec productSpec);
 }
