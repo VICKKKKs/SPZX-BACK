@@ -2,11 +2,14 @@ package com.atguigu.spzx.manager.controller;
 
 import com.atguigu.spzx.manager.service.CategoryBrandService;
 import com.atguigu.spzx.model.dto.product.CategoryBrandDto;
+import com.atguigu.spzx.model.entity.product.Brand;
 import com.atguigu.spzx.model.entity.product.CategoryBrand;
 import com.atguigu.spzx.model.vo.common.Result;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/admin/product/categoryBrand")
@@ -32,6 +35,12 @@ public class CategoryBrandController {
     public Result updateCategoryBrand(@RequestBody CategoryBrand categoryBrand) {
         categoryBrandService.updateCategoryBrand(categoryBrand);
         return Result.ok(null);
+    }
+
+    @GetMapping(value = "findBrandByCategoryId/{categoryId}")
+    public Result<List<Brand>> findBrandByCategoryId(@PathVariable Long categoryId) {
+        List<Brand> brandList = categoryBrandService.findByCategoryId(categoryId);
+        return Result.ok(brandList);
     }
 
 

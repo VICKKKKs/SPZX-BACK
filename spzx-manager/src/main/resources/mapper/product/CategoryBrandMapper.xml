@@ -47,4 +47,8 @@
             and cb.is_deleted = 0
         </where>
     </select>
+    <select id="selectByCategoryId" resultType="com.atguigu.spzx.model.entity.product.Brand">
+        select b.* from category_brand cb left join brand b on cb.brand_id = b.id
+        where cb.category_id=#{categoryId} and cb.is_deleted=0
+    </select>
 </mapper>
