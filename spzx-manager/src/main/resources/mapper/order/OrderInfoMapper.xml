@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.spzx.manager.mapper.OrderInfoMapper">
+    <select id="selectStatistics" resultType="com.atguigu.spzx.model.entity.order.OrderStatistics">
+        select DATE_FORMAT(oi.create_time, '%Y-%m-%d') as orderDate,
+               sum(oi.total_amount) as totalAmount,
+               count(oi.create_time) as totalNum
+        from order_info oi
+        where DATE_FORMAT(oi.create_time, '%Y-%m-%d') = #{createTime}
+          and is_deleted = 0
+        group by DATE_FORMAT(oi.create_time, '%Y-%m-%d')
+    </select>
+</mapper>
