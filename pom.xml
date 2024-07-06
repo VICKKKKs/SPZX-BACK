@@ -28,6 +28,9 @@
         <pagehelper.version>1.4.3</pagehelper.version>
         <knife4j.version>4.1.0</knife4j.version>
         <easyexcel.version>3.1.0</easyexcel.version>
+        <cloud.version>2022.0.2</cloud.version>
+        <alibaba.version>2022.0.0.0-RC2</alibaba.version>
+        <alipay.version>4.8.73.ALL</alipay.version>
     </properties>
 
     <modules>
@@ -37,11 +40,37 @@
         <module>spzx-common/common-util</module>
         <module>spzx-common/common-service</module>
         <module>spzx-common/common-log</module>
+        <module>spzx-service</module>
+        <module>spzx-service-client</module>
+        <module>spzx-service-client/service-product-client</module>
+        <module>spzx-service-client/service-user-client</module>
+        <module>spzx-server-gateway</module>
     </modules>
 
     <dependencyManagement>
 
         <dependencies>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--导入支付宝支付sdk-->
+            <dependency>
+                <groupId>com.alipay.sdk</groupId>
+                <artifactId>alipay-sdk-java</artifactId>
+                <version>${alipay.version}</version>
+            </dependency>
 
             <!-- mybatis和spring boot整合的起步依赖 -->
             <dependency>

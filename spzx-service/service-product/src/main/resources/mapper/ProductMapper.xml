@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.spzx.product.mapper.ProductMapper">
+    <select id="selectProductSkuBySale" resultType="com.atguigu.spzx.model.entity.product.ProductSku">
+        select sku.id,
+               sku.sku_code,
+               sku.sku_name,
+               sku.product_id,
+               sku.thumb_img,
+               sku.sale_price,
+               sku.market_price,
+               sku.cost_price,
+               sku.stock_num,
+               sku.sale_num,
+               sku.sku_spec,
+               sku.weight,
+               sku.volume,
+               sku.status,
+               sku.create_time,
+               sku.update_time,
+               sku.is_deleted
+        from product_sku sku
+                 left join
+             product p on sku.product_id = p.id
+        where p.status = 1
+          and p.audit_status = 1
+          and sku.is_deleted = 0
+          and p.is_deleted = 0
+        order by sku.sale_num desc
+        limit 20
+    </select>
+    <select id="selectProductSkuById" resultType="com.atguigu.spzx.model.entity.product.ProductSku">
+        select sku.id,
+               sku.sku_code,
+               sku.sku_name,
+               sku.product_id,
+               sku.thumb_img,
+               sku.sale_price,
+               sku.market_price,
+               sku.cost_price,
+               sku.stock_num,
+               sku.sale_num,
+               sku.sku_spec,
+               sku.weight,
+               sku.volume,
+               sku.status,
+               sku.create_time,
+               sku.update_time,
+               sku.is_deleted
+        from product_sku sku
+                 left join
+             product p on sku.product_id = p.id
+        where p.status = 1
+          and p.audit_status = 1
+          and sku.is_deleted = 0
+          and p.is_deleted = 0
+          and sku.id = #{id}
+        order by sku.sale_num desc
+        limit 20
+    </select>
+</mapper>
