@@ -10,4 +10,6 @@ public interface CategoryMapper {
     List<Category> selectOneCategory();
 
     List<Category> selectOneCategoryById(Long id);
+
+    List<Category> selectAllCategory();
 }

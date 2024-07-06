@@ -7,4 +7,9 @@
     <select id="selectOneCategoryById" resultType="com.atguigu.spzx.model.entity.product.Category">
         select * from category where parent_id = 0 and is_deleted = 0 and id = #{id}
     </select>
+    <select id="selectAllCategory" resultType="com.atguigu.spzx.model.entity.product.Category">
+        select *
+        from category
+        where is_deleted = 0
+    </select>
 </mapper>

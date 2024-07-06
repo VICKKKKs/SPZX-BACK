@@ -30,4 +30,11 @@ public class CategoryServiceImpl implements CategoryService {
         List<Category> testList = categoryMapper.selectOneCategoryById(id);
         return testList;
     }
+
+    @Override
+    public List<Category> findCategoryTree() {
+        List<Category> allCategoryList = categoryMapper.selectAllCategory();
+        List<Category> categoryTree = TreeHelper.buildTree(allCategoryList);
+        return categoryTree;
+    }
 }
