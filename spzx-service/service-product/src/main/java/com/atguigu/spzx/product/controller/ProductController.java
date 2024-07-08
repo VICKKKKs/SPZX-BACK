@@ -3,6 +3,7 @@ package com.atguigu.spzx.product.controller;
 import com.atguigu.spzx.model.dto.product.ProductSkuDto;
 import com.atguigu.spzx.model.entity.product.ProductSku;
 import com.atguigu.spzx.model.vo.common.Result;
+import com.atguigu.spzx.model.vo.product.ProductItemVo;
 import com.atguigu.spzx.product.service.ProductService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -23,5 +24,11 @@ public class ProductController {
     public Result<PageInfo<ProductSku>> findByPage(@PathVariable Integer page, @PathVariable Integer limit, @Parameter ProductSkuDto productSkuDto) {
         PageInfo<ProductSku> pageInfo = productService.findByPage(page,limit,productSkuDto);
         return Result.ok(pageInfo);
+    }
+
+    @GetMapping("item/{skuId}")
+    public Result<ProductItemVo> item(@PathVariable Long skuId) {
+        ProductItemVo productItemVo = productService.findItem(skuId);
+        return Result.ok(productItemVo);
     }
 }

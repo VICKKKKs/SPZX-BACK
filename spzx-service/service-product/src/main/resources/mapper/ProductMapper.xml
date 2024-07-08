@@ -93,5 +93,9 @@
             order by sku.sale_price desc
         </if>
     </select>
+    <select id="selectBySkuId" resultType="com.atguigu.spzx.model.entity.product.Product">
+        select * from product where is_deleted=0 and id=#{productId}
+    </select>
+
 
 </mapper>
