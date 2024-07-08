@@ -58,4 +58,40 @@
         order by sku.sale_num desc
         limit 20
     </select>
+    <select id="selectProductSkuByPage" resultType="com.atguigu.spzx.model.entity.product.ProductSku">
+        select sku.*
+        from product_sku sku
+        left join product p on p.id = sku.product_id
+        <where>
+            <if test="keyword!=null and keyword != ''">
+                and sku.sku_name like concat('%',#{keyword},'%')
+            </if>
+            <if test="brandId != null and brandId != ''">
+                and p.brand_id = #{brandId}
+            </if>
+            <if test="category1Id != null and category1Id != ''">
+                and p.category1_id = #{category1Id}
+            </if>
+            <if test="category2Id != null and category2Id != ''">
+                and p.category2_id = #{category2Id}
+            </if>
+            <if test="category3Id != null and category3Id != ''">
+                and p.category3_id = #{category3Id}
+            </if>
+            and sku.is_deleted = 0
+            and p.audit_status = 1
+            and p.status = 1
+            and p.is_deleted = 0
+        </where>
+        <if test="order == 1">
+            order by sku.sale_num desc
+        </if>
+        <if test="order == 2">
+            order by sku.sale_price asc
+        </if>
+        <if test="order == 3">
+            order by sku.sale_price desc
+        </if>
+    </select>
+
 </mapper>
