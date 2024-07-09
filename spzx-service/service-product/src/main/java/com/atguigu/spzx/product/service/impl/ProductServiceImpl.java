@@ -82,4 +82,9 @@ public class ProductServiceImpl implements ProductService {
         productItemVo.setSkuSpecValueMap(map); // 页面用户选择的规格对应sku的map
         return productItemVo;
     }
+
+    @Override
+    public ProductSku getBySkuId(Long skuId) {
+        return productSkuMapper.selectBySkuId(skuId);
+    }
 }

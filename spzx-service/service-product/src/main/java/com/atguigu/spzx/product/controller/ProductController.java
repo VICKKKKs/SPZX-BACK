@@ -31,4 +31,9 @@ public class ProductController {
         ProductItemVo productItemVo = productService.findItem(skuId);
         return Result.ok(productItemVo);
     }
+    @GetMapping("getBySkuId/{skuId}")
+    ProductSku getBySkuId(@PathVariable Long skuId){
+        return productService.getBySkuId(skuId);
+    }
+
 }

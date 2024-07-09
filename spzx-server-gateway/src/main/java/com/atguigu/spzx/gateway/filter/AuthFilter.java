@@ -14,6 +14,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.RequestPath;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -38,6 +39,13 @@ public class AuthFilter implements GlobalFilter, Ordered {
         URI uri = request.getURI();
         HttpHeaders headers = request.getHeaders();
         List<String> tokens = headers.get("token");
+
+        // 白名单或者黑名单
+        AntPathMatcher antPathMatcher = new AntPathMatcher();
+        boolean match = antPathMatcher.match("/auth", path.toString());
+        if(match){
+            System.out.println("请求路径中携带auth，说明必须进行鉴权");
+        }
 
         if (tokens != null && tokens.size() > 0) {
             String token = tokens.get(0);

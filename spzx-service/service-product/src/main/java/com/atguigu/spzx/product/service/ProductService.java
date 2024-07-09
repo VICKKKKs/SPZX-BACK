@@ -15,4 +15,6 @@ public interface ProductService {
     PageInfo<ProductSku> findByPage(Integer page, Integer limit, ProductSkuDto productSkuDto);
 
     ProductItemVo findItem(Long skuId);
+
+    ProductSku getBySkuId(Long skuId);
 }
