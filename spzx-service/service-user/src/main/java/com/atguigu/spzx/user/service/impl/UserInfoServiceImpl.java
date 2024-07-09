@@ -8,11 +8,13 @@ import com.atguigu.spzx.model.vo.user.UserInfoVo;
 import com.atguigu.spzx.user.controller.UserInfoController;
 import com.atguigu.spzx.user.mapper.UserInfoMapper;
 import com.atguigu.spzx.user.service.UserInfoService;
+import org.apache.el.parser.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.DigestUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.UUID;
@@ -78,8 +80,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public UserInfoVo getCurrentUserInfo(String token) {
         // 获取用户的头像和昵称信息
-        String userInfoJSON  = redisTemplate.opsForValue().get("user:login:" + token);
-        Assert.hasText(userInfoJSON,"登录过期");
+        String userInfoJSON = redisTemplate.opsForValue().get("user:login:" + token);
+        Assert.hasText(userInfoJSON, "登录过期");
         UserInfo userInfo = JSON.parseObject(userInfoJSON, UserInfo.class);
 
         String nickName = userInfo.getNickName();
@@ -88,5 +90,15 @@ public class UserInfoServiceImpl implements UserInfoService {
         userInfoVo.setNickName(nickName);
         userInfoVo.setAvatar(avatar);
         return userInfoVo;
+    }
+
+    @Override
+    public UserInfo checkToken(String token) {
+        String userInfoJSON = redisTemplate.opsForValue().get("user:login:" + token);
+        UserInfo userInfo = null;
+        if (StringUtils.hasText(userInfoJSON)){
+            userInfo = JSON.parseObject(userInfoJSON, UserInfo.class);
+        }
+        return userInfo;
     }
 }
