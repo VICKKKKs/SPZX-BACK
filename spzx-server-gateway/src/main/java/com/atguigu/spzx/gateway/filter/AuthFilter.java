@@ -51,7 +51,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
                 userInfo = completableFuture.get();
                 System.out.println(userInfo);
                 // 传递鉴权结果
-                if (userInfo != null) {
+                if (userInfo != null) {     // SerializerFeature.BrowserCompatible解决浏览器json格式转换时乱码问题
                     request.mutate().header("userInfoJson", JSON.toJSONString(userInfo, SerializerFeature.BrowserCompatible));
                     exchange.mutate().request(request);
                 }
