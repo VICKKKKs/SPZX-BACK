@@ -18,6 +18,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(userLoginAuthInterceptor)
+                // 配置了一个排除规则，表示对于匹配 **/api/user/userInfo/** 的路径，
+                // 不应用 userLoginAuthInterceptor 拦截器。
+                .excludePathPatterns("**/api/user/userInfo/**")
                 .addPathPatterns("/**");
     }
 

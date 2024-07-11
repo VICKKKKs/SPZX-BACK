@@ -4,6 +4,7 @@ import com.atguigu.spzx.cart.service.CartService;
 import com.atguigu.spzx.model.entity.cart.CartInfo;
 import com.atguigu.spzx.model.vo.common.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +15,8 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
+    @Autowired
+    private RedisCacheManager cacheManager;
 
     // /api/order/cart/auth/cartList
     @GetMapping("/auth/cartList")
@@ -59,7 +62,18 @@ public class CartController {
     }
 
 
-    // /api/order/cart/auth/deleteChecked
+    // /api/order/cart/auth/getAllCkecked
+    @GetMapping("/auth/getAllCkecked")
+    public Result<List<CartInfo>> getAllCkecked(){
+        List<CartInfo> cartInfoList = cartService.getAllChecked();
+        return Result.ok(cartInfoList);
+    }
+
+    @GetMapping("/auth/deleteChecked")
+    public Result deleteChecked(){
+        cartService.deleteChecked();
+        return Result.ok(null);
+    }
 
 
 

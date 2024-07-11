@@ -11,6 +11,9 @@
 
     <artifactId>spzx-service-client</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>service-cart-client</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

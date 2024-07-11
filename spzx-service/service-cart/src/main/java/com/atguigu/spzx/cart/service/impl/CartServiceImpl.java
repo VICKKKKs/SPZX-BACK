@@ -126,6 +126,27 @@ public class CartServiceImpl implements CartService {
         // 直接删除整个哈希表
         redisTemplate.delete(cartKey);
     }
+
+    @Override
+    public List<CartInfo> getAllChecked() {
+        UserInfo userInfo = UserInfoAuthContextUtil.get();
+        String cartKey = "user:cart:" + userInfo.getId();
+        List<Object> cartObjectList = redisTemplate.opsForHash().values(cartKey);
+        Assert.notNull(cartObjectList, "购物车为空");
+        List<CartInfo> cartInfoList = cartObjectList.stream().map(CartInfoJSON -> JSON.parseObject(CartInfoJSON.toString(), CartInfo.class))
+                .filter(cartInfo -> cartInfo.getIsChecked() == 1).collect(Collectors.toList());
+        return cartInfoList;
+    }
+
+    @Override
+    public void deleteChecked() {
+        Long id = UserInfoAuthContextUtil.get().getId();
+        String cartKey = "user:cart:" + id;
+        List<Object> cartObjectList = redisTemplate.opsForHash().values(cartKey);
+        Assert.notNull(cartObjectList,"购物车为空");
+        cartObjectList.stream().map(cartInfoJSON -> JSON.parseObject(cartInfoJSON.toString(), CartInfo.class)
+        ).filter(cartInfo -> cartInfo.getIsChecked()==1).forEach(cartInfo -> redisTemplate.opsForHash().delete(cartKey,String.valueOf(cartInfo.getSkuId())));
+    }
 }
 
 
