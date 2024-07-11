@@ -12,7 +12,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableUserLoginAuthInterceptor
 @EnableGlobalExceptionHandler
 @EnableUserTokenFeignInterceptor
-@EnableFeignClients({"com.atguigu.spzx.feign.cart","com.atguigu.spzx.feign.user"})
+@EnableFeignClients({"com.atguigu.spzx.feign.cart","com.atguigu.spzx.feign.user","com.atguigu.spzx.feign.product"})
 @MapperScan("com.atguigu.spzx.order.mapper")
 public class OrderApplication {
     public static void main(String[] args) {

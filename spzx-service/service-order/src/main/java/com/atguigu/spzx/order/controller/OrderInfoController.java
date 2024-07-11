@@ -36,4 +36,12 @@ public class OrderInfoController {
         return Result.ok(orderInfo);
     }
 
+    // /api/order/orderInfo/auth/buy/{skuId}
+    @GetMapping("auth/buy/{skuId}")
+    public Result<TradeVo> buy(@PathVariable Long skuId) {
+        TradeVo tradeVo = orderInfoService.buy(skuId);
+        return Result.ok(tradeVo);
+    }
+
+
 }

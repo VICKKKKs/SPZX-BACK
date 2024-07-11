@@ -1,12 +1,14 @@
 package com.atguigu.spzx.order.service.impl;
 
 import com.atguigu.spzx.feign.cart.CartFeignClient;
+import com.atguigu.spzx.feign.product.ProductFeignClient;
 import com.atguigu.spzx.feign.user.UserFeignClient;
 import com.atguigu.spzx.model.dto.order.OrderInfoDto;
 import com.atguigu.spzx.model.entity.cart.CartInfo;
 import com.atguigu.spzx.model.entity.order.OrderInfo;
 import com.atguigu.spzx.model.entity.order.OrderItem;
 import com.atguigu.spzx.model.entity.order.OrderLog;
+import com.atguigu.spzx.model.entity.product.ProductSku;
 import com.atguigu.spzx.model.entity.user.UserAddress;
 import com.atguigu.spzx.model.entity.user.UserInfo;
 import com.atguigu.spzx.model.entity.user.UserInfoAuthContextUtil;
@@ -16,6 +18,7 @@ import com.atguigu.spzx.order.mapper.OrderInfoMapper;
 import com.atguigu.spzx.order.mapper.OrderItemMapper;
 import com.atguigu.spzx.order.mapper.OrderLogMapper;
 import com.atguigu.spzx.order.service.OrderInfoService;
+import org.apache.poi.ss.formula.functions.Now;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +47,9 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 
     @Autowired
     private OrderLogMapper orderLogMapper;
+
+    @Autowired
+    private ProductFeignClient productFeignClient;
 
 
     @Override
@@ -143,5 +149,31 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     public OrderInfo getOrderInfo(Long orderId) {
         OrderInfo orderInfo = orderInfoMapper.selectById(orderId);
         return orderInfo;
+    }
+
+    @Override
+    public TradeVo buy(Long skuId) {
+        TradeVo tradeVo = new TradeVo();
+        // 获取productSku
+        ProductSku productSku = productFeignClient.getBySkuId(skuId).getData();
+
+        tradeVo.setTotalAmount(productSku.getSalePrice());
+
+        OrderItem orderItem = new OrderItem();
+
+        orderItem.setSkuId(skuId);
+        orderItem.setSkuName(productSku.getSkuName());
+        orderItem.setThumbImg(productSku.getThumbImg());
+        orderItem.setSkuPrice(productSku.getSalePrice());
+        orderItem.setSkuNum(1);
+        orderItem.setCreateTime(new Date());
+        orderItem.setUpdateTime(new Date());
+        orderItem.setIsDeleted(0);
+
+
+        List<OrderItem> orderItemList = new ArrayList<>();
+        orderItemList.add(orderItem);
+        tradeVo.setOrderItemList(orderItemList);
+        return tradeVo;
     }
 }
