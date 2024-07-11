@@ -5,6 +5,7 @@ import com.atguigu.spzx.model.entity.order.OrderInfo;
 import com.atguigu.spzx.model.vo.common.Result;
 import com.atguigu.spzx.model.vo.order.TradeVo;
 import com.atguigu.spzx.order.service.OrderInfoService;
+import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +42,15 @@ public class OrderInfoController {
     public Result<TradeVo> buy(@PathVariable Long skuId) {
         TradeVo tradeVo = orderInfoService.buy(skuId);
         return Result.ok(tradeVo);
+    }
+
+    // /api/order/orderInfo/auth/{page}/{limit}
+    @GetMapping("/auth/{page}/{limit}")
+    public Result<PageInfo<OrderInfo>> list(@PathVariable Integer page,
+                                            @PathVariable Integer limit,
+                                            @RequestParam(required = false, defaultValue = "") Integer orderStatus) {
+        PageInfo<OrderInfo> pageInfo = orderInfoService.list(page,limit,orderStatus);
+        return Result.ok(pageInfo);
     }
 
 

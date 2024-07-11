@@ -56,4 +56,23 @@
         where id = #{id}
           and is_deleted = 0
     </select>
+    <select id="selectOrderPage" resultMap="orderInfoMap">
+        select * from order_info
+        <where>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="orderStatus != null and orderStatus != ''">
+                and order_status = #{orderStatus}
+            </if>
+            and is_deleted = 0
+        </where>
+        order by id desc
+    </select>
+    <resultMap id="orderInfoMap" type="com.atguigu.spzx.model.entity.order.OrderInfo" autoMapping="true">
+        <id property="id" column="id"></id>
+        <collection property="orderItemList" ofType="com.atguigu.spzx.model.entity.order.OrderItem" autoMapping="true"
+                    column="{orderId = id}" select="com.atguigu.spzx.order.mapper.OrderItemMapper.selectByOrderId">
+        </collection>
+    </resultMap>
 </mapper>

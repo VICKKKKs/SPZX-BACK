@@ -18,6 +18,8 @@ import com.atguigu.spzx.order.mapper.OrderInfoMapper;
 import com.atguigu.spzx.order.mapper.OrderItemMapper;
 import com.atguigu.spzx.order.mapper.OrderLogMapper;
 import com.atguigu.spzx.order.service.OrderInfoService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.poi.ss.formula.functions.Now;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -175,5 +177,13 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         orderItemList.add(orderItem);
         tradeVo.setOrderItemList(orderItemList);
         return tradeVo;
+    }
+
+    @Override
+    public PageInfo<OrderInfo> list(Integer page, Integer limit, Integer orderStatus) {
+        PageHelper.startPage(page, limit);
+        Long userId = UserInfoAuthContextUtil.get().getId();
+        List<OrderInfo> orderInfos = orderInfoMapper.selectOrderPage(userId,orderStatus);
+        return new PageInfo<>(orderInfos);
     }
 }
