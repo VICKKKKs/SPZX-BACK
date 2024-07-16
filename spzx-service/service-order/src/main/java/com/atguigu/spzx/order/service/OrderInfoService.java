@@ -15,4 +15,6 @@ public interface OrderInfoService {
     TradeVo buy(Long skuId);
 
     PageInfo<OrderInfo> list(Integer page, Integer limit, Integer orderStatus);
+
+    OrderInfo getByOrderNo(String orderNo);
 }

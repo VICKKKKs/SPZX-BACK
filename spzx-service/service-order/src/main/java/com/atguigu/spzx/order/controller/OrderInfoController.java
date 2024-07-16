@@ -7,6 +7,7 @@ import com.atguigu.spzx.model.vo.order.TradeVo;
 import com.atguigu.spzx.order.service.OrderInfoService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Parameter;
+import org.apache.logging.log4j.message.ReusableMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,6 +52,12 @@ public class OrderInfoController {
                                             @RequestParam(required = false, defaultValue = "") Integer orderStatus) {
         PageInfo<OrderInfo> pageInfo = orderInfoService.list(page,limit,orderStatus);
         return Result.ok(pageInfo);
+    }
+
+    @GetMapping("auth/getByOrderNo/{orderNo}")
+    public Result<OrderInfo> getByOrderNo(@PathVariable String orderNo) {
+        OrderInfo orderInfo = orderInfoService.getByOrderNo(orderNo);
+        return Result.ok(orderInfo);
     }
 
 

@@ -69,10 +69,17 @@
         </where>
         order by id desc
     </select>
+
+    <select id="selectByOrderNo" resultMap="orderInfoMap">
+        select * from order_info where order_no = #{orderNo}
+    </select>
+
     <resultMap id="orderInfoMap" type="com.atguigu.spzx.model.entity.order.OrderInfo" autoMapping="true">
-        <id property="id" column="id"></id>
-        <collection property="orderItemList" ofType="com.atguigu.spzx.model.entity.order.OrderItem" autoMapping="true"
-                    column="{orderId = id}" select="com.atguigu.spzx.order.mapper.OrderItemMapper.selectByOrderId">
+<!--        <collection property="orderItemList" ofType="com.atguigu.spzx.model.entity.order.OrderItem" autoMapping="true"-->
+<!--                    column="{orderId = id}" select="com.atguigu.spzx.order.mapper.OrderItemMapper.selectByOrderId">-->
+<!--        </collection>-->
+        <collection property="orderItemList" ofType="com.atguigu.spzx.model.entity.order.OrderItem"
+                    select="com.atguigu.spzx.order.mapper.OrderItemMapper.selectByOrderId" column="id" autoMapping="true">
         </collection>
     </resultMap>
 </mapper>

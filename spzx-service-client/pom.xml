@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>service-cart-client</module>
+        <module>service-order-client</module>
     </modules>
 
     <properties>

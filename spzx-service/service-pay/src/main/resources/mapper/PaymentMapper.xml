@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.spzx.pay.mapper.PaymentMapper">
+    <insert id="insert">
+        insert into payment_info
+        (id, user_id, order_no, pay_type, out_trade_no, amount, content, payment_status, callback_time,
+         callback_content, create_time, update_time, is_deleted)
+        values
+        (#{id},
+         #{userId},
+         #{orderNo},
+         #{payType},
+         #{outTradeNo},
+         #{amount},
+         #{content},
+         #{paymentStatus},
+         #{callbackTime},
+         #{callbackContent},
+         #{createTime},
+         #{updateTime},
+         #{isDeleted}
+        )
+    </insert>
+
+    <update id="update">
+        update payment_info
+        <where>
+            <if test="paymentStatus != null and paymentStatus != ''">
+                and payment_status = #{paymentStatus}
+            </if>
+        </where>
+    </update>
+
+</mapper>

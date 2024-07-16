@@ -10,4 +10,6 @@ public interface OrderInfoMapper {
     OrderInfo selectById(Long orderId);
 
     List<OrderInfo> selectOrderPage(Long userId, Integer orderStatus);
+
+    OrderInfo selectByOrderNo(String orderNo);
 }

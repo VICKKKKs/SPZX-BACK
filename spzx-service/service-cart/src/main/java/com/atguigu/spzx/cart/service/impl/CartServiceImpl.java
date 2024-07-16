@@ -43,7 +43,6 @@ public class CartServiceImpl implements CartService {
     public void addToCart(Long skuId, Integer skuNum) {
 
         // 根据skuID查询商品信息
-        ProductSku productSku = productFeignClient.getBySkuId(skuId);
 
         // 将productSKU转为cattInfo
         CartInfo cartInfo = null;
@@ -63,6 +62,7 @@ public class CartServiceImpl implements CartService {
             // 添加
             cartInfo = new CartInfo();
             // 根据skuID查询商品信息
+            ProductSku productSku = productFeignClient.getBySkuId(skuId).getData();
             cartInfo.setSkuNum(skuNum);
             cartInfo.setUserId(productSku.getId());
             cartInfo.setSkuId(skuId);
@@ -143,9 +143,9 @@ public class CartServiceImpl implements CartService {
         Long id = UserInfoAuthContextUtil.get().getId();
         String cartKey = "user:cart:" + id;
         List<Object> cartObjectList = redisTemplate.opsForHash().values(cartKey);
-        Assert.notNull(cartObjectList,"购物车为空");
+        Assert.notNull(cartObjectList, "购物车为空");
         cartObjectList.stream().map(cartInfoJSON -> JSON.parseObject(cartInfoJSON.toString(), CartInfo.class)
-        ).filter(cartInfo -> cartInfo.getIsChecked()==1).forEach(cartInfo -> redisTemplate.opsForHash().delete(cartKey,String.valueOf(cartInfo.getSkuId())));
+        ).filter(cartInfo -> cartInfo.getIsChecked() == 1).forEach(cartInfo -> redisTemplate.opsForHash().delete(cartKey, String.valueOf(cartInfo.getSkuId())));
     }
 }
 

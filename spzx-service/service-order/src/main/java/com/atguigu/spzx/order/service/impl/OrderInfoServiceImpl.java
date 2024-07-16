@@ -186,4 +186,10 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         List<OrderInfo> orderInfos = orderInfoMapper.selectOrderPage(userId,orderStatus);
         return new PageInfo<>(orderInfos);
     }
+
+    @Override
+    public OrderInfo getByOrderNo(String orderNo) {
+        OrderInfo orderInfo = orderInfoMapper.selectByOrderNo(orderNo);
+        return orderInfo;
+    }
 }
