@@ -45,6 +45,8 @@
         <module>spzx-service-client/service-product-client</module>
         <module>spzx-service-client/service-user-client</module>
         <module>spzx-server-gateway</module>
+        <module>shardingSphere_01</module>
+        <module>juc</module>
     </modules>
 
     <dependencyManagement>
