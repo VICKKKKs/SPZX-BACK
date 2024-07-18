@@ -34,7 +34,7 @@ rules:
         transactionalReadQueryStrategy: PRIMARY # 事务内读请求的路由策略，可选值：PRIMARY（路由至主库）、FIXED（同一事务内路由至固定数据源）、DYNAMIC（同一事务内路由至非固定数据源）。默认值：DYNAMIC
         loadBalancerName: random
     loadBalancers:
-      random:
+      random: # RANDOM随机
         type: RANDOM   # round
 props:
   sql-show: true

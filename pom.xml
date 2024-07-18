@@ -47,6 +47,8 @@
         <module>spzx-server-gateway</module>
         <module>shardingSphere_01</module>
         <module>juc</module>
+        <module>ShardingSphere_02</module>
+        <module>ShardingSphere_03</module>
     </modules>
 
     <dependencyManagement>

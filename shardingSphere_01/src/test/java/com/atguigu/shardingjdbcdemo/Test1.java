@@ -29,6 +29,15 @@ public class Test1 {
         }
     }
 
+    @Test
+    public void testInsert(){
+        User user = new User();
+        user.setUname("David");
+        int row = userMapper.insert(user);
+        System.out.println(row);
+
+    }
+
 }
 
 
