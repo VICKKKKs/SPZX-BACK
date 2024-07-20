@@ -8,7 +8,7 @@ public class Demo02 implements Callable<Integer> {
 
 
     @Override
-    public Integer call() throws Exception {
+    public Integer call() {
         int result = 0;
         for (int i = 0; i < 10; i++) {
             result += i;
